@@ -1,25 +1,24 @@
-// src/configs/DbConfig.js
-import { MongoClient, ServerApiVersion } from 'mongodb';
-import dotenv from 'dotenv';
-dotenv.config();
+import { createConnection } from "mysql2/promise";
 
-const uri = process.env.MONGO_URI;
+let connection = null;
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
-
-export async function connectToMongo() {
-  try {
-    await client.connect();
-    console.log("✅ Connected to MongoDB Atlas");
-    return client.db(); // optionally pass db name here: client.db("yourDBName")
-  } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
-    throw err;
-  }
+export async function connectDb() {
+    try {
+        connection = await createConnection({
+            host: 'localhost',
+            user: 'root',
+            password: 'cdac',
+            port: 3306,
+            database: 'petstore'
+        });
+        console.log("database connected");
+    } catch (error) {
+        console.log("Error in db connection");
+        console.log(error);
+    }
 }
+
+export function getConnectionObject(){
+    return connection;
+}
+
