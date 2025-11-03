@@ -2,7 +2,7 @@ import express from 'express';
 import { connectDb } from "./src/configs/DbConfig.js";
 import { getAllPets, getPetById, addPet, updatePet, deletePetById } from './src/controllers/PetController.js';
 
-import { addQuery, getAllQuery } from './src/controllers/contactUsController.js';
+import { addQuery, getAllQuery } from './src/controllers/ContactUsController.js';
 
 
 const app = express();
