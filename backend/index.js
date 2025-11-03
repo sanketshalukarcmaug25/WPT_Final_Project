@@ -1,11 +1,16 @@
 import express from 'express';
 import { connectDb } from "./src/configs/DbConfig.js";
 import { getAllPets, getPetById, addPet, updatePet, deletePetById } from './src/controllers/PetController.js';
-
+import cors from "cors";
 import { addQuery, getAllQuery } from './src/controllers/ContactUsController.js';
 
 
 const app = express();
+app.use(cors({
+  origin: "http://localhost:5173", // Allow your frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Pet API
