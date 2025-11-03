@@ -31,3 +31,23 @@ export async function getAllQuery(request, response){
         response.status(500).send({message:'Something went wrong'});
     }
 }
+
+
+export async function deleteQuery(request, response) {
+    try {
+        const connection = getConnectionObject();
+        const { id } = request.params; 
+
+        const qry = `DELETE FROM contact_us WHERE id = ${id}`;
+        const [resultSet] = await connection.query(qry);
+
+        if (resultSet.affectedRows === 1) {
+            response.status(200).send({ message: "Query deleted successfully!" });
+        } else {
+            response.status(404).send({ message: "Query not found or already deleted." });
+        }
+    } catch (error) {
+        console.error(error);
+        response.status(500).send({ message: "Something went wrong while deleting the query." });
+    }
+}
