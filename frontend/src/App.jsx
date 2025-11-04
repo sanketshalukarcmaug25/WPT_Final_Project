@@ -6,6 +6,8 @@ import { ContactRequest } from "./components/ContactRequest";
 import { Products } from "./components/Products";
 import { HandleProducts } from "./components/HandleProducts";
 import { EditProduct } from "./components/EditProduct";
+import { SignUpForm } from "./components/SignUpForm";
+import { LoginPage } from "./components/Login";
 
 
 
@@ -16,8 +18,10 @@ function App() {
       <Navigationbar/>
       <Routes>
         <Route path="/" element={<ContactUs/>}/>
+        <Route path="/signup" element={<SignUpForm />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/han" element={<HandleProducts/>} />
+        <Route path="/products/handle" element={<HandleProducts/>} />
         <Route path="/edit-product/:id" element={<EditProduct />} />
         <Route path="/contact-us" element={<ContactUs/>}/>
         <Route path="/contact-us/request" element={<ContactRequest/>}/>

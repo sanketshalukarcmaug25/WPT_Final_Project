@@ -42,10 +42,10 @@ const upload = multer({ storage });
 
 app.get("/products", getAllProducts);
 app.get("/products/:id", getProductById);
-app.post("/products", addProduct);
-app.delete("/products/:id", deleteProductById);
-app.put("/products/:id", updateProduct);
-app.put("/products/:id", upload.single("image"), updateProduct);
+app.post("/products",authorize([ROLES.ADMIN]), addProduct);
+app.delete("/products/:id", authorize([ROLES.ADMIN]),deleteProductById);
+app.put("/products/:id",authorize([ROLES.ADMIN]), updateProduct);
+app.put("/products/:id", authorize([ROLES.ADMIN]),upload.single("image"), updateProduct);
 
 
 // Pet API

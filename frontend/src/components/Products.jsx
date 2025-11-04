@@ -8,21 +8,40 @@ export function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  
   async function fetchProducts() {
     try {
-      const response = await axios.get(PRODUCT_API_URL);
+      const token = localStorage.getItem("authToken"); 
+
+      const response = await axios.get(PRODUCT_API_URL, {
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+
       setProducts(response.data || []);
     } catch (error) {
       console.error("Error fetching products:", error);
-      toast.error("Failed to fetch products");
+
+  
+      if (error.response && error.response.status === 401) {
+        toast.error("Unauthorized! Please login again.");
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userRole");
+        window.location.href = "/login";
+      } else {
+        toast.error("Failed to fetch products");
+      }
     } finally {
       setLoading(false);
     }
   }
 
+
   function handleBuyNow(product) {
     toast.success(`You selected ${product.name} — feature coming soon!`);
   }
+
 
   useEffect(() => {
     fetchProducts();
@@ -40,21 +59,25 @@ export function Products() {
       ) : products.length === 0 ? (
         <p className="text-center">No products available.</p>
       ) : (
-        <Row xs={1} md={5} className="g-4">
+        <Row xs={1} md={4} className="g-4">
           {products.map((product) => (
             <Col key={product.id}>
-              <Card className="h-200 shadow-sm">
+              <Card className="h-100 shadow-sm">
                 <Card.Img
                   variant="top"
-                  src={product.image_path || "https://www.bbassets.com/media/uploads/p/l/256657_19-pedigree-dry-dog-food-chicken-milk-for-puppy.jpg"}
+                  src={product.image_path}
                   alt={product.name}
-                  style={{ height: "300px", objectFit: "cover" }}
+                  style={{ height: "250px", objectFit: "cover" }}
                 />
                 <Card.Body>
                   <Card.Title>{product.name}</Card.Title>
                   <Card.Text>{product.description}</Card.Text>
-                  <p className="mb-1"><strong>Price:</strong> ₹{product.price}</p>
-                  <p><strong>Quantity:</strong> {product.quantity}</p>
+                  <p className="mb-1">
+                    <strong>Price:</strong> ₹{product.price}
+                  </p>
+                  <p>
+                    <strong>Quantity:</strong> {product.quantity}
+                  </p>
                   <Button
                     variant="success"
                     size="sm"

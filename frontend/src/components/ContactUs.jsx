@@ -5,7 +5,7 @@ import axios from "axios";
 import { CONTACT_API_URL } from "../constants/APIConstants";
 
 export function ContactUs() {
-  // ✅ FIXED: renamed from [name, setName] to [formData, setFormData]
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
