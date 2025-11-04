@@ -5,10 +5,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 export function Navigationbar() {
   const navigate = useNavigate();
 
-  // ✅ Get role from localStorage
+ 
   const userRole = localStorage.getItem("userRole");
 
-  // ✅ Logout handler
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userRole");
@@ -31,7 +31,7 @@ export function Navigationbar() {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="d-flex align-items-center">
 
-            {/* ✅ If ADMIN */}
+          
             {userRole === "ADMIN" ? (
               <>
                 <Nav.Link as={NavLink} to="/" end>
@@ -51,7 +51,7 @@ export function Navigationbar() {
                 </Nav.Link>
               </>
             ) : (
-              /* ✅ If CUSTOMER or not logged in */
+             
               <>
                 <Nav.Link as={NavLink} to="/" end>
                   Home
@@ -74,7 +74,6 @@ export function Navigationbar() {
               </>
             )}
 
-            {/* ✅ Right side buttons */}
             <div className="d-flex ms-3">
               {userRole ? (
                 <Button
