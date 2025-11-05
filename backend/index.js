@@ -8,69 +8,63 @@ import { login } from './src/controllers/LoginController.js';
 import { registerCustomer } from './src/controllers/CustomerController.js';
 import { registerAdmin } from './src/controllers/AdminController.js';
 import { authorize, verifyToken } from './src/middlewares/VerifyToken.js';
-import { addQuery, getAllQuery,deleteQuery} from './src/controllers/contactUsController.js';
-import { createOrder } from './src/controllers/OrderController.js';
+import { addQuery, getAllQuery, deleteQuery } from './src/controllers/contactUsController.js';
+import orderRoutes from "./src/routes/OrderRoute.js";
 import { addProduct, deleteProductById, getAllProducts, getProductById, updateProduct } from './src/controllers/ProductController.js';
 import { ROLES } from './src/constants/RoleConstants.js';
 
-
 const app = express();
+const PORT = 7655;
+
 app.use(cors());
 app.use(express.json());
 
-//order API's
-app.post('/orders', createOrder);
+
+app.use("/orders", orderRoutes);
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // folder where images will be stored
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-
 const upload = multer({ storage });
 
 
-//product API's
-// app.get("/products",verifyToken, authorize([ROLES.ADMIN, ROLES.CUSTOMER]) , getAllProducts);
-// app.get("/products/:id", verifyToken, authorize([ROLES.ADMIN, ROLES.CUSTOMER]), getProductById);
-// app.post("/products",verifyToken, authorize([ROLES.ADMIN]), addProduct);
-// app.delete("/products/:id", verifyToken,authorize([ROLES.ADMIN]), deleteProductById);
-// app.put("/products/:id",verifyToken, authorize([ROLES.ADMIN]), updateProduct);
-
 app.get("/products", getAllProducts);
 app.get("/products/:id", getProductById);
-app.post("/products",authorize([ROLES.ADMIN]), addProduct);
-app.delete("/products/:id", authorize([ROLES.ADMIN]),deleteProductById);
-app.put("/products/:id",authorize([ROLES.ADMIN]), updateProduct);
-app.put("/products/:id", authorize([ROLES.ADMIN]),upload.single("image"), updateProduct);
+app.post("/products", verifyToken, authorize([ROLES.ADMIN]), addProduct);
+app.delete("/products/:id", verifyToken, authorize([ROLES.ADMIN]), deleteProductById);
+app.put("/products/:id", verifyToken, authorize([ROLES.ADMIN]), upload.single("image"), updateProduct);
 
 
-// Pet API
 app.get("/pets", getAllPets);
 app.get("/pets/:id", getPetById);
-app.post("/pets",verifyToken, authorize([ROLES.ADMIN]), addPet);
-app.put("/pets/:id",verifyToken, authorize([ROLES.ADMIN]) ,updatePet);
-app.delete("/pets/:id",verifyToken, authorize([ROLES.ADMIN]) ,deletePetById);
+app.post("/pets", verifyToken, authorize([ROLES.ADMIN]), addPet);
+app.put("/pets/:id", verifyToken, authorize([ROLES.ADMIN]), updatePet);
+app.delete("/pets/:id", verifyToken, authorize([ROLES.ADMIN]), deletePetById);
 
 
-// Contact us API's
-app.get("/contactus",getAllQuery);
-app.post("/contactus",addQuery);
-app.delete("/contactus",deleteQuery);
-//Customers API's
+app.get("/contactus", getAllQuery);
+app.post("/contactus", addQuery);
+app.delete("/contactus", deleteQuery);
+
+
 app.post("/customers", registerCustomer);
+app.post("/admins", registerAdmin);
 
-//Admin API's
-app.post("/admins",   registerAdmin);
 
-//Login API's
 app.post("/login", login);
 
 
-app.listen(7655, () => {
-
-    connectDb();
+app.listen(PORT, async () => {
+  try {
+    await connectDb();
+    console.log(`Server running on http://localhost:${PORT}`);
+  } catch (err) {
+    console.error("Database connection failed:", err);
+  }
 });

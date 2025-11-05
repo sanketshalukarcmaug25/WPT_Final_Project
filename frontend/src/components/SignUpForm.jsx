@@ -36,7 +36,7 @@ export function SignUpForm() {
       style={{
         minHeight: "100vh",
         backgroundImage: `
-          url('https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg')
+          url('https://t3.ftcdn.net/jpg/10/68/18/30/360_F_1068183071_pHWzbbyw3zIsDlGmnYqXruisiiMp4j1j.jpg')
         `,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -48,9 +48,9 @@ export function SignUpForm() {
           <Card
             className="shadow-lg border-0 rounded-4"
             style={{
-              background: "rgba(0, 0, 0, 0.58)", // Transparent white
-              backdropFilter: "blur(0px)", // Frosted glass effect
-              WebkitBackdropFilter: "blur(12px)", // Safari support
+              background: "rgba(0, 0, 0, 0.58)", 
+              backdropFilter: "blur(0px)", 
+              WebkitBackdropFilter: "blur(12px)", 
               border: "1px solid rgba(255, 255, 255, 0.3)",
               color: "#fff",
             }}
@@ -70,6 +70,7 @@ export function SignUpForm() {
                   password: "",
                   phone: "",
                   address: "",
+                  role: "CUSTOMER",
                 }}
                 validationSchema={signUpSchema}
                 onSubmit={handleSubmit}
@@ -151,7 +152,7 @@ export function SignUpForm() {
                         </BootstrapForm.Control.Feedback>
                       </BootstrapForm.Group>
 
-                      <BootstrapForm.Group className="mb-4">
+                      <BootstrapForm.Group className="mb-3">
                         <BootstrapForm.Label className="text-light">
                           Address
                         </BootstrapForm.Label>
@@ -166,6 +167,25 @@ export function SignUpForm() {
                         />
                         <BootstrapForm.Control.Feedback type="invalid">
                           <ErrorMessage name="address" />
+                        </BootstrapForm.Control.Feedback>
+                      </BootstrapForm.Group>
+
+                      <BootstrapForm.Group className="mb-4">
+                        <BootstrapForm.Label className="text-light">
+                          Role
+                        </BootstrapForm.Label>
+                        <BootstrapForm.Select
+                          as={Field}
+                          name="role"
+                          onChange={handleChange}
+                          value={values.role}
+                          isInvalid={touched.role && errors.role}
+                        >
+                          <option value="CUSTOMER">Customer</option>
+                          <option value="ADMIN">Admin</option>
+                        </BootstrapForm.Select>
+                        <BootstrapForm.Control.Feedback type="invalid">
+                          <ErrorMessage name="role" />
                         </BootstrapForm.Control.Feedback>
                       </BootstrapForm.Group>
 

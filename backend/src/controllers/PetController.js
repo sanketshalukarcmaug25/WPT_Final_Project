@@ -1,8 +1,6 @@
 import { getConnectionObject } from "../configs/DbConfig.js";
 
-/**
- * Add a new Pet
- */
+
 export async function addPet(request, response) {
     try {
         const connection = getConnectionObject();
@@ -24,9 +22,7 @@ export async function addPet(request, response) {
     }
 }
 
-/**
- * Update Pet by ID
- */
+
 export async function updatePet(request, response) {
     try {
         const connection = getConnectionObject();
@@ -50,9 +46,7 @@ export async function updatePet(request, response) {
     }
 }
 
-/**
- * Get all Pets
- */
+
 export async function getAllPets(request, response) {
     try {
         const connection = getConnectionObject();
@@ -65,9 +59,7 @@ export async function getAllPets(request, response) {
     }
 }
 
-/**
- * Get Pet by ID
- */
+
 export async function getPetById(request, response) {
     try {
         const connection = getConnectionObject();
@@ -86,9 +78,7 @@ export async function getPetById(request, response) {
     }
 }
 
-/**
- * Delete Pet by ID
- */
+
 export async function deletePetById(request, response) {
     try {
         const connection = getConnectionObject();

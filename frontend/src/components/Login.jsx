@@ -24,23 +24,27 @@ export function LoginPage() {
   });
 
   const handleSubmit = async (formData, { resetForm }) => {
-    try {
-      const res = await loginUser(formData);
-      const { token } = res.data;
+  try {
+    const res = await loginUser(formData);
+    const { token, user } = res.data;  
 
-      localStorage.setItem("authToken", token);
-      localStorage.setItem("userRole", formData.role);
+    
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("userRole", user.role);
+    localStorage.setItem("userId", user.id);  
+    localStorage.setItem("customerId", user.id);  
 
-      toast.success("Login successful!");
-      resetForm();
+    toast.success("Login successful!");
+    resetForm();
 
-      if (formData.role === "ADMIN") navigate("/admin-dashboard");
-      else navigate("/");
-    } catch (err) {
-      console.error(err);
-      toast.error(err.response?.data?.message || "Login failed!");
-    }
-  };
+    if (user.role === "ADMIN") navigate("/admin-dashboard");
+    else navigate("/");
+  } catch (err) {
+    console.error(err);
+    toast.error(err.response?.data?.message || "Login failed!");
+  }
+};
+
 
   return (
     <Container
@@ -49,7 +53,7 @@ export function LoginPage() {
       style={{
         minHeight: "100vh",
         backgroundImage:
-          "url('https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg')",
+          "url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHBldCUyMHNob3B8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -60,7 +64,7 @@ export function LoginPage() {
           <Card
             className="shadow-lg border-0 rounded-4"
             style={{
-              background: "rgba(1, 0, 0, 0.56)", // transparent white
+              background: "rgba(1, 0, 0, 0.56)", 
               backdropFilter: "blur(0px)",
               WebkitBackdropFilter: "blur(12px)",
               border: "1px solid rgba(255, 255, 255, 0.3)",

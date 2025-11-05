@@ -21,7 +21,25 @@ export function Pets() {
   }
 
   function handleAdoptNow(pet) {
-    toast.success(`You selected ${pet.breed} — feature coming soon!`);
+    
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const existingItem = cartItems.find((item) => item.id === pet.id && item.type === "pet");
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cartItems.push({
+        id: pet.id,
+        name: pet.breed,
+        price: pet.price,
+        quantity: 1,
+        image_path: pet.image_path,
+        type: "pet",
+      });
+    }
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    toast.success(`${pet.breed} added to cart!`);
   }
 
   useEffect(() => {
@@ -48,7 +66,7 @@ export function Pets() {
                   variant="top"
                   src={
                     pet.image_path ||
-                    "https://cdn-icons-png.flaticon.com/512/616/616408.png"
+                    "https://via.placeholder.com/300"
                   }
                   alt={pet.breed}
                   style={{ height: "300px", objectFit: "cover" }}

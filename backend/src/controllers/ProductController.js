@@ -1,6 +1,6 @@
 import { getConnectionObject } from "../configs/DbConfig.js";
 
-// 🟢 Add new product
+
 export async function addProduct(request, response) {
   try {
     const connection = getConnectionObject();
@@ -24,7 +24,7 @@ export async function addProduct(request, response) {
   }
 }
 
-// 🟡 Update product (with image URL)
+
 export async function updateProduct(request, response) {
   try {
     const connection = getConnectionObject();
@@ -50,7 +50,7 @@ export async function updateProduct(request, response) {
   }
 }
 
-// 🔵 Get all products
+
 export async function getAllProducts(request, response) {
   try {
     const connection = getConnectionObject();
@@ -63,7 +63,7 @@ export async function getAllProducts(request, response) {
   }
 }
 
-// 🟣 Get product by ID
+
 export async function getProductById(request, response) {
   try {
     const connection = getConnectionObject();
@@ -80,7 +80,7 @@ export async function getProductById(request, response) {
   }
 }
 
-// 🔴 Delete product by ID
+
 export async function deleteProductById(request, response) {
   try {
     const connection = getConnectionObject();
