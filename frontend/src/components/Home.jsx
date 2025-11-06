@@ -282,9 +282,8 @@ export function HomePage() {
 
         {/* Footer */}
         <footer className="bg-dark text-light text-center py-3 mt-5">
-          <p className="mb-0">
-            © {new Date().getFullYear()} 🐾 Our Pet Store — All Rights Reserved
-          </p>
+          
+         
         </footer>
       </div>
     </div>
