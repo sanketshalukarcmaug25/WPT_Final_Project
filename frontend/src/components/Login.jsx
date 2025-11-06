@@ -37,7 +37,7 @@ export function LoginPage() {
     toast.success("Login successful!");
     resetForm();
 
-    if (user.role === "ADMIN") navigate("/admin-dashboard");
+    if (user.role === "ADMIN") navigate("/");
     else navigate("/");
   } catch (err) {
     console.error(err);

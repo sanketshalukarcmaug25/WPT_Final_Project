@@ -31,7 +31,7 @@ export function EditProduct() {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success(res.data.message || "Product updated successfully!");
-      navigate("/products/han");
+      navigate("/products/handle");
     } catch (err) {
       toast.error("Failed to update product");
     }

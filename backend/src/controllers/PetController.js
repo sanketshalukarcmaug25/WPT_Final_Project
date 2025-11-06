@@ -4,10 +4,10 @@ import { getConnectionObject } from "../configs/DbConfig.js";
 export async function addPet(request, response) {
     try {
         const connection = getConnectionObject();
-        const { age, breed, type, description, price } = request.body;
+        const { age, breed, type, description, price, image_path } = request.body;
 
-        const qry = `INSERT INTO pet(age, breed, type, description, price)
-                     VALUES(${age}, '${breed}', '${type}', '${description}', ${price})`;
+        const qry = `INSERT INTO pet(age, breed, type, description, price, image_path)
+                     VALUES(${age}, '${breed}', '${type}', '${description}', ${price}, '${image_path}')`;
 
         const [resultSet] = await connection.query(qry);
 
