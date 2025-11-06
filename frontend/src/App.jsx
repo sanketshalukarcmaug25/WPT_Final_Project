@@ -11,6 +11,8 @@ import {Pets} from "./components/Pets";
 import { EditProduct } from "./components/EditProduct";
 import { SignUpForm } from "./components/SignUpForm";
 import { LoginPage } from "./components/Login";
+import {AboutUs} from "./components/AboutUs";
+import { Footer } from "./components/Footer";
 
 
 
@@ -30,8 +32,11 @@ function App() {
         <Route path="/pets/handle" element={<HandlePets />} />
         <Route path="/edit-pet/:id" element={<EditPet />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/contact-us/request" element={<ContactRequest />} />
+        
       </Routes>
+      <Footer /> 
       <ToastContainer />
     </BrowserRouter>
   )
