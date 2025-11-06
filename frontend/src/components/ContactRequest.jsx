@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Table, Container, Alert, Spinner, Button } from "react-bootstrap";
 import axios from "axios";
 import { CONTACT_API_URL } from "../constants/APIConstants";
+import { deleteContact } from "../services/ContactService";
 import { toast, Bounce } from "react-toastify";
 
 export function ContactRequest() {
@@ -33,7 +34,7 @@ export function ContactRequest() {
     if (!window.confirm("Are you sure you want to delete this request?")) return;
 
     try {
-      await axios.delete(`${CONTACT_API_URL}/${id}`);
+      await deleteContact(id);
       setQueries(queries.filter((q) => q.id !== id));
 
       toast.success("Request deleted successfully!", {

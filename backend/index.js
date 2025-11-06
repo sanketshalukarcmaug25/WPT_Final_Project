@@ -50,7 +50,7 @@ app.delete("/pets/:id", verifyToken, authorize([ROLES.ADMIN]), deletePetById);
 
 app.get("/contactus", getAllQuery);
 app.post("/contactus", addQuery);
-app.delete("/contactus", deleteQuery);
+app.delete("/contactus/:id", verifyToken, authorize([ROLES.ADMIN]), deleteQuery);
 
 
 app.post("/customers", registerCustomer);

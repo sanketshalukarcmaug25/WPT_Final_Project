@@ -38,9 +38,9 @@ function App() {
         <Route path="/edit-pet/:id" element={<AdminRoute><EditPet /></AdminRoute>} />
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/contactus/request" element={<ContactRequest />} />
-         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Orders />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
       <Footer /> 
       <ToastContainer />

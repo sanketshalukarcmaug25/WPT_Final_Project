@@ -8,3 +8,12 @@ export async function addContact(formData) {
 export async function getAllContacts() {
   return axios.get(CONTACT_API_URL);
 }
+
+export async function deleteContact(id) {
+  const token = localStorage.getItem('authToken');
+  return axios.delete(`${CONTACT_API_URL}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}

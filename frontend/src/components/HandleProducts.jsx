@@ -19,7 +19,10 @@ export function HandleProducts() {
 
   async function fetchProducts() {
     try {
-      const response = await axios.get(PRODUCT_API_URL);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.get(PRODUCT_API_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProducts(response.data || []);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -32,7 +35,10 @@ export function HandleProducts() {
   async function handleAddProduct(e) {
     e.preventDefault();
     try {
-      const response = await axios.post(PRODUCT_API_URL, newProduct);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.post(PRODUCT_API_URL, newProduct, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success(response.data.message || "Product added successfully!");
       setNewProduct({
         name: "",
@@ -51,7 +57,10 @@ export function HandleProducts() {
   async function handleDelete(id) {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      const response = await axios.delete(`${PRODUCT_API_URL}/${id}`);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.delete(`${PRODUCT_API_URL}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success(response.data.message || "Product deleted");
       fetchProducts();
     } catch (error) {

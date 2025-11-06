@@ -35,12 +35,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/about" className="text-light text-decoration-none">
+                <a href="/aboutus" className="text-light text-decoration-none">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="/contact-us" className="text-light text-decoration-none">
+                <a href="/contactus" className="text-light text-decoration-none">
                   Contact Us
                 </a>
               </li>
