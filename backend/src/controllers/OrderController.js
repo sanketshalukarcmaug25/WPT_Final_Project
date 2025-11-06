@@ -70,6 +70,7 @@ export async function getOrdersByCustomer(req, res) {
       o.quantity,
       COALESCE(p.name, pt.type) AS item_name,
       COALESCE(p.price, pt.price) AS item_price,
+      COALESCE(p.image_path, pt.image_path) AS item_image,
       CASE WHEN o.product_id IS NOT NULL THEN 'Product' ELSE 'Pet' END AS order_type
     FROM orders o
     LEFT JOIN product p ON o.product_id = p.id
@@ -99,6 +100,7 @@ export async function getOrdersByType(req, res) {
       o.quantity,
       COALESCE(p.name, pt.type) AS item_name,
       COALESCE(p.price, pt.price) AS item_price,
+      COALESCE(p.image, pt.image) AS item_image,
       CASE WHEN o.product_id IS NOT NULL THEN 'Product' ELSE 'Pet' END AS order_type
     FROM orders o
     LEFT JOIN product p ON o.product_id = p.id
