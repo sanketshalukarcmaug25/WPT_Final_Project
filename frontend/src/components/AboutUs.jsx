@@ -82,15 +82,15 @@ export function AboutUs() {
         {[
           {
             name: "Sanket Shalukar",
-            img: "https://cdn-icons-png.flaticon.com/512/236/236831.png", // 👨🏻 Male Avatar
+            img: "/images/3.jpg", 
           },
           {
             name: "Shubham Thakur",
-            img: "https://cdn-icons-png.flaticon.com/512/4140/4140037.png", // 👨🏻 Male Avatar
+            img: "/images/1.png", 
           },
           {
             name: "Shruti Jadhav",
-            img: "https://cdn-icons-png.flaticon.com/512/3135/3135789.png", // 👩🏻 Female Avatar
+            img: "/images/2.png",
           },
         ].map((member, index) => (
           <Col md={4} className="mb-4" key={index}>
