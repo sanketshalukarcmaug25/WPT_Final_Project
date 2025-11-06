@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
 import { PET_API_URL } from "../constants/APIConstants";
 
 export function Pets() {
@@ -14,32 +14,52 @@ export function Pets() {
       setPets(response.data || []);
     } catch (error) {
       console.error("Error fetching pets:", error);
-      toast.error("Failed to fetch pets");
+      toast.error("Failed to fetch pets 😢", {
+        position: "top-right",
+        autoClose: 2000,
+        transition: Bounce,
+        theme: "colored",
+      });
     } finally {
       setLoading(false);
     }
   }
 
   function handleAdoptNow(pet) {
-    
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const existingItem = cartItems.find((item) => item.id === pet.id && item.type === "pet");
-
-    if (existingItem) {
-      existingItem.quantity += 1;
-    } else {
-      cartItems.push({
-        id: pet.id,
-        name: pet.breed,
-        price: pet.price,
-        quantity: 1,
-        image_path: pet.image_path,
-        type: "pet",
+    // ✅ Show toast immediately — guaranteed to appear every time
+    setTimeout(() => {
+      toast.success(`${pet.breed} added to cart 🛒`, {
+        toastId: `pet-${pet.id}`, // prevents duplicate toast spam
+        position: "top-right",
+        autoClose: 2000,
+        transition: Bounce,
+        theme: "colored",
       });
-    }
+    }, 0);
 
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    toast.success(`${pet.breed} added to cart!`);
+    try {
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const existingItem = cartItems.find(
+        (item) => item.id === pet.id && item.type === "pet"
+      );
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cartItems.push({
+          id: pet.id,
+          name: pet.breed,
+          price: pet.price,
+          quantity: 1,
+          image_path: pet.image_path,
+          type: "pet",
+        });
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    } catch (error) {
+      console.error("Error updating cart:", error);
+    }
   }
 
   useEffect(() => {
@@ -61,13 +81,10 @@ export function Pets() {
         <Row xs={1} md={5} className="g-4">
           {pets.map((pet) => (
             <Col key={pet.id}>
-              <Card className="h-200 shadow-sm">
+              <Card className="h-100 shadow-sm">
                 <Card.Img
                   variant="top"
-                  src={
-                    pet.image_path ||
-                    "https://via.placeholder.com/300"
-                  }
+                  src={pet.image_path || "https://via.placeholder.com/300"}
                   alt={pet.breed}
                   style={{ height: "300px", objectFit: "cover" }}
                 />

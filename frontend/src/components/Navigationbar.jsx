@@ -33,13 +33,15 @@ export function Navigationbar() {
             <Nav.Link as={NavLink} to="/" end>Home</Nav.Link>
             <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
             <Nav.Link as={NavLink} to="/pets">Pets</Nav.Link>
+            <Nav.Link as={NavLink} to="/contactus">ContactUs</Nav.Link>
+            <Nav.Link as={NavLink} to="/aboutus">AboutUs</Nav.Link>
 
             {/* Admin-specific links */}
             {isLoggedIn && userRole === "ADMIN" && (
               <>
                 <Nav.Link as={NavLink} to="/pets/handle">Add Pets</Nav.Link>
                 <Nav.Link as={NavLink} to="/products/handle">Add Product</Nav.Link>
-                <Nav.Link as={NavLink} to="/contact-us/request">Contact Requests</Nav.Link>
+                <Nav.Link as={NavLink} to="/contactus/request">Contact Requests</Nav.Link>
               </>
             )}
 

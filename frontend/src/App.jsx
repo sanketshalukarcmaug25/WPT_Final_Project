@@ -11,6 +11,13 @@ import { Pets } from "./components/Pets";
 import { EditProduct } from "./components/EditProduct";
 import { SignUpForm } from "./components/SignUpForm";
 import { LoginPage } from "./components/Login";
+import { HomePage } from "./components/Home";
+import { AdminRoute } from "./components/AdminRoute";
+import { Footer } from "./components/Footer";
+import { AboutUs } from "./components/AboutUs";
+import { Cart } from "./components/Cart";
+import { Orders } from "./components/Orders";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -20,7 +27,7 @@ function App() {
     <BrowserRouter>
       <Navigationbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/products" element={<Products />} />
@@ -29,8 +36,11 @@ function App() {
         <Route path="/pets" element={<Pets />} />
         <Route path="/pets/handle" element={<AdminRoute><HandlePets /></AdminRoute>} />
         <Route path="/edit-pet/:id" element={<AdminRoute><EditPet /></AdminRoute>} />
-        <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/contact-us/request" element={<ContactRequest />} />
+        <Route path="/contactus" element={<ContactUs />} />
+        <Route path="/contactus/request" element={<ContactRequest />} />
+         <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
       </Routes>
       <Footer /> 
       <ToastContainer />
