@@ -11,10 +11,6 @@ import { Pets } from "./components/Pets";
 import { EditProduct } from "./components/EditProduct";
 import { SignUpForm } from "./components/SignUpForm";
 import { LoginPage } from "./components/Login";
-import { HomePage } from "./components/Home";
-import { Cart } from "./components/Cart";
-import { Orders } from "./components/Orders";
-import { AdminRoute } from "./components/AdminRoute";
 
 
 
@@ -34,11 +30,9 @@ function App() {
         <Route path="/pets/handle" element={<AdminRoute><HandlePets /></AdminRoute>} />
         <Route path="/edit-pet/:id" element={<AdminRoute><EditPet /></AdminRoute>} />
         <Route path="/contact-us" element={<ContactUs />} />
-        <Route path="/contact-us/request" element={<AdminRoute><ContactRequest /></AdminRoute>} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/orders" element={<Orders />} />
-
+        <Route path="/contact-us/request" element={<ContactRequest />} />
       </Routes>
+      <Footer /> 
       <ToastContainer />
     </BrowserRouter>
   )
