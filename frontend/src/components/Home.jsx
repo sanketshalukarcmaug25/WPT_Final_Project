@@ -17,12 +17,11 @@ export function HomePage() {
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [background, setBackground] = useState(
-    "url('https://i.pinimg.com/736x/59/e3/bd/59e3bd66cbe6c76f6645d328c03b82ba.jpg')"
+    "url('https://i.pinimg.com/originals/f3/ec/e5/f3ece5f7cfd3e8c3a08fbd71ca7fab6a.jpg')"
   );
   const [opacity, setOpacity] = useState(1);
   const navigate = useNavigate();
 
-  
   async function fetchData() {
     try {
       const [productRes, petRes] = await Promise.all([
@@ -43,7 +42,6 @@ export function HomePage() {
     fetchData();
   }, []);
 
-  
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -51,7 +49,7 @@ export function HomePage() {
       setOpacity(newOpacity);
       if (scrollY > 400) {
         setBackground(
-          "url('https://i.pinimg.com/736x/59/e3/bd/59e3bd66cbe6c76f6645d328c03b82ba.jpg')"
+          "url('https://i.pinimg.com/originals/f3/ec/e5/f3ece5f7cfd3e8c3a08fbd71ca7fab6a.jpg')"
         );
       }
     };
@@ -60,40 +58,32 @@ export function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  
-  const handleProductClick = (id) => {
-    navigate(`/products`);
-  };
-
-  const handlePetClick = (id) => {
-    navigate(`/pets/`);
-  };
+  const handleProductClick = (id) => navigate("/products");
+  const handlePetClick = (id) => navigate("/pets");
 
   return (
     <div
       style={{
-        backgroundImage: background,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), ${background}`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
         transition: "background-image 1.5s ease-in-out",
+        color: "#f8f9fa",
       }}
     >
-      {}
       <div
         style={{
-          backgroundColor: `rgba(0,0,0,${0.6 * opacity})`,
           minHeight: "100vh",
-          color: "white",
           transition: "background-color 0.5s ease",
         }}
       >
-        {}
+        {/* 🦴 Hero Section */}
         <div
           className="d-flex flex-column justify-content-center align-items-center text-center"
           style={{
             height: "100vh",
-            backgroundColor: "rgba(0, 0, 0, 0.31)",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
           }}
         >
           <h1 className="fw-bold text-warning display-4 mb-3">
@@ -111,28 +101,23 @@ export function HomePage() {
           </Button>
         </div>
 
-        {}
+        {/* Welcome */}
         <Container
           className="my-5"
-          style={{
-            backgroundColor: `rgba(0,0,0,${0.6 * opacity})`,
-            color: "white",
-            borderRadius: "10px",
-            padding: "40px",
-          }}
+         
         >
           <div className="text-center bg-dark bg-opacity-50 rounded shadow-lg p-5">
             <h3 className="text-warning fw-bold mb-3">
               Welcome to Our Pet Paradise
             </h3>
-            <p className="text-light fs-5 mx-auto">
+            <p className="fs-5 mx-auto" style={{ color: "#f8f9fa" }}>
               Discover the best products and adorable pets — toys, food,
               grooming, and more — all under one roof!
             </p>
           </div>
         </Container>
 
-        {}
+        {/* 🛒 Featured Products */}
         <Container className="my-5">
           <h3 className="text-center text-warning mb-4 fw-bold">
             🛒 Featured Products
@@ -156,8 +141,8 @@ export function HomePage() {
                   className="shadow-sm border-0 flex-shrink-0"
                   style={{
                     width: "250px",
-                    backgroundColor: "rgba(0,0,0,0.7)",
-                    color: "white",
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                    color: "#fff",
                   }}
                 >
                   <Card.Img
@@ -170,7 +155,7 @@ export function HomePage() {
                     <Card.Title className="fw-semibold text-warning">
                       {product.name}
                     </Card.Title>
-                    <Card.Text className="text-light small">
+                    <Card.Text className="small text-light">
                       {product.description?.substring(0, 60)}...
                     </Card.Text>
                     <p className="fw-bold mb-2 text-light">
@@ -190,7 +175,7 @@ export function HomePage() {
           )}
         </Container>
 
-        {}
+        {/* 🐶 Pets */}
         <Container className="my-5">
           <h3 className="text-center text-warning mb-4 fw-bold">
             🐶 Meet Our Lovely Pets
@@ -214,16 +199,13 @@ export function HomePage() {
                   className="shadow-sm border-0 flex-shrink-0"
                   style={{
                     width: "250px",
-                    backgroundColor: "rgba(0,0,0,0.7)",
-                    color: "white",
+                    backgroundColor: "rgba(255,255,255,0.1)",
+                    color: "#fff",
                   }}
                 >
                   <Card.Img
                     variant="top"
-                    src={
-                      pet.image_path ||
-                      "https://via.placeholder.com/200"
-                    }
+                    src={pet.image_path || "https://via.placeholder.com/200"}
                     alt={pet.breed}
                     style={{ height: "200px", objectFit: "cover" }}
                   />
@@ -249,11 +231,11 @@ export function HomePage() {
           )}
         </Container>
 
-        {}
+        {/* About */}
         <Container className="my-5">
           <div className="text-center py-5 px-3 bg-dark bg-opacity-50 rounded shadow-lg">
             <h3 className="text-warning fw-bold mb-3">About Our Pet Store</h3>
-            <p className="text-light fs-5 mx-auto" style={{ maxWidth: "800px" }}>
+            <p className="fs-5 mx-auto" style={{ color: "#f8f9fa", maxWidth: "800px" }}>
               We started our journey with one simple goal — to make pets’ lives
               happier and healthier. From adorable puppies to premium food and
               accessories, we bring you everything your furry family deserves.
@@ -261,45 +243,44 @@ export function HomePage() {
           </div>
         </Container>
 
-        {}
+        {/* Testimonials */}
         <Container className="my-5">
           <div className="text-center py-5 px-3 bg-dark bg-opacity-50 rounded shadow-lg">
             <h3 className="text-warning fw-bold mb-4">What Our Customers Say</h3>
-
             <Carousel
-              indicators={true}
+              indicators
               interval={4000}
               fade
               pause={false}
               className="mx-auto"
               style={{ maxWidth: "800px" }}
             >
-              <Carousel.Item>
-                <p className="fs-5 text-light fst-italic">
-                  “Amazing products and super fast delivery! My dog loves the new
-                  toy.”
-                </p>
-                <p className="fw-bold text-warning mb-0">- Priya Sharma</p>
-              </Carousel.Item>
-
-              <Carousel.Item>
-                <p className="fs-5 text-light fst-italic">
-                  “Great variety of food and grooming items. Highly recommend!”
-                </p>
-                <p className="fw-bold text-warning mb-0">- Rohan Deshmukh</p>
-              </Carousel.Item>
-
-              <Carousel.Item>
-                <p className="fs-5 text-light fst-italic">
-                  “Best pet store in town! Excellent customer service.”
-                </p>
-                <p className="fw-bold text-warning mb-0">- Sneha Patil</p>
-              </Carousel.Item>
+              {[
+                {
+                  quote:
+                    "Amazing products and super fast delivery! My dog loves the new toy.",
+                  name: "- Priya Sharma",
+                },
+                {
+                  quote:
+                    "Great variety of food and grooming items. Highly recommend!",
+                  name: "- Rohan Deshmukh",
+                },
+                {
+                  quote: "Best pet store in town! Excellent customer service.",
+                  name: "- Sneha Patil",
+                },
+              ].map((review, i) => (
+                <Carousel.Item key={i}>
+                  <p className="fs-5 text-light fst-italic">{review.quote}</p>
+                  <p className="fw-bold text-warning mb-0">{review.name}</p>
+                </Carousel.Item>
+              ))}
             </Carousel>
           </div>
         </Container>
 
-        {}
+        {/* Footer */}
         <footer className="bg-dark text-light text-center py-3 mt-5">
           <p className="mb-0">
             © {new Date().getFullYear()} 🐾 Our Pet Store — All Rights Reserved
