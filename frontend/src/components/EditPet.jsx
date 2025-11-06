@@ -18,11 +18,14 @@ export  function EditPet() {
 
   useEffect(() => {
     fetchPet();
-  }, []);
+  }, [id]);
 
   const fetchPet = async () => {
     try {
-      const response = await axios.get(`${PET_API_URL}/${id}`);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.get(`${PET_API_URL}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setPet(response.data);
     } catch (error) {
       console.error("Error fetching pet details:", error);
@@ -37,7 +40,10 @@ export  function EditPet() {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${PET_API_URL}/${id}`, pet);
+      const token = localStorage.getItem("authToken");
+      await axios.put(`${PET_API_URL}/${id}`, pet, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success("Pet updated successfully!");
       navigate("/pets/handle");
     } catch (error) {

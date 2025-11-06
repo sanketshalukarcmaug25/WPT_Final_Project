@@ -23,7 +23,10 @@ export function HandlePets() {
 
   const fetchPets = async () => {
     try {
-      const response = await axios.get(PET_API_URL);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.get(PET_API_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setPets(response.data);
     } catch (error) {
       console.error("Error fetching pets:", error);
@@ -38,7 +41,10 @@ export function HandlePets() {
   const handleAddPet = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${PET_API_URL}`, pet);
+      const token = localStorage.getItem("authToken");
+      await axios.post(`${PET_API_URL}`, pet, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success("Pet added successfully!");
       setPet({
         type: "",
@@ -57,7 +63,10 @@ export function HandlePets() {
 
   const handleDeletePet = async (id) => {
     try {
-      await axios.delete(`${PET_API_URL}/${id}`);
+      const token = localStorage.getItem("authToken");
+      await axios.delete(`${PET_API_URL}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success("Pet deleted successfully!");
       fetchPets();
     } catch (error) {
@@ -68,8 +77,8 @@ export function HandlePets() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4" style={{ color: "blue" }}>
-        🐾 Manage Pets
+      <h2 className="text-center mb-4">
+        🐾 Manage Pets Inventory
       </h2>
 
       <form onSubmit={handleAddPet} className="card p-4 shadow-sm mb-4">

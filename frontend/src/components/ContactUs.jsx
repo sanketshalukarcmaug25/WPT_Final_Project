@@ -55,7 +55,7 @@ export function ContactUs() {
     <div
       style={{
         backgroundImage:
-          "url('https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg')",
+          "url('https://c4.wallpaperflare.com/wallpaper/758/403/592/dogs-boxer-boxer-dog-dog-wallpaper-preview.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

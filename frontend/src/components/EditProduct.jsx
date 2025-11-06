@@ -12,7 +12,10 @@ export function EditProduct() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${PRODUCT_API_URL}/${id}`)
+    const token = localStorage.getItem("authToken");
+    axios.get(`${PRODUCT_API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then(res => {
         setProduct(res.data);
       })
@@ -23,7 +26,10 @@ export function EditProduct() {
   async function handleUpdate(e) {
     e.preventDefault();
     try {
-      const res = await axios.put(`${PRODUCT_API_URL}/${id}`, product);
+      const token = localStorage.getItem("authToken");
+      const res = await axios.put(`${PRODUCT_API_URL}/${id}`, product, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       toast.success(res.data.message || "Product updated successfully!");
       navigate("/products/han");
     } catch (err) {
